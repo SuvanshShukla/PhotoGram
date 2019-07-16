@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 
 function Addpost({getPostTitle, pushPost, getPostDesc, postDesc, postTitle, getPostImage, postImage}) {
@@ -13,13 +13,17 @@ function Addpost({getPostTitle, pushPost, getPostDesc, postDesc, postTitle, getP
                 <input type="text" onChange={(e)=>{getPostTitle(e)}} value={postTitle}></input>
                 Post Description:
                 <input type="text" onChange={(f)=>{getPostDesc(f)}} value={postDesc}></input>
-                {/* <img src="https://picsum.photos/200/300"></img> */}
                 Post Image:
                 <input type="text" onChange={(g) => {getPostImage(g)}} value={postImage}></input>
                 <button onClick={()=>{pushPost()}}>Submit</button>                 
             </div>
+            <hr />
             <div>
               <Link to="/gallery">GALLERY</Link>
+            </div>
+            <hr />
+            <div>
+              <Link to="/">Home</Link>
             </div>
         </div>
     );

@@ -26,13 +26,13 @@ class App extends React.Component {
     })
   }
 
-  getPostDesc(f){
+  getPostDesc(f){ //getting the post description
     this.setState({
       postDesc: f.target.value
     })
   }
 
-  getPostImage(g){
+  getPostImage(g){ //getting the post image url
     this.setState({
       postImage: g.target.value
     })
@@ -60,20 +60,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">LOGIN</Link>
-            </li>
-            <li>
-              <Link to="/add">ADD A POST</Link>
-            </li>
-            <li>
-              <Link to="/gallery">GALLERY</Link>
-            </li>
-          </ul>
-        </div>
-
+        
         <Route path="/" exact component={Home}></Route>
         <Route path="/add" exact render={(props) => <Addpost {...props} postTitle={this.state.postTitle} postDesc={this.state.postDesc} postImage={this.state.postImage} pushPost={this.pushPost.bind(this)} getPostTitle={this.getPostTitle.bind(this)} getPostDesc={this.getPostDesc.bind(this)} getPostImage={this.getPostImage.bind(this)}></Addpost>}></Route>
         <Route path="/gallery" exact render={(props) => <Gallery {...props} postFeed={this.state.postFeed}></Gallery>}></Route>
