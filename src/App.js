@@ -1,26 +1,48 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Addpost from './Components/Addpost/Addpost';
+import Gallery from './Components/Gallery/Gallery';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {};
+    this.state = {
+      postFeed: []
+    }
+  }
+
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <ul>
+            <li>
+              {/* <Link to="/">LOGIN</Link> */}
+            </li>
+            <li>
+              <Link to="/add">ADD A POST</Link>
+            </li>
+            <li>
+              <Link to="/gallery">GALLERY</Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* <Route path="/" exact component={Home}></Route> */}
+        <Route path="/add" exact render={(props) => <Addpost {...props} postFeed={this.state.postFeed}></Addpost>}></Route>
+        <Route path="/gallery" exact component={Gallery}></Route>
+
+      </Router>
+    );
+  }
 }
+
+
 
 export default App;
