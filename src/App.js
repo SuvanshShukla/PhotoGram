@@ -6,8 +6,6 @@ import Gallery from './Components/Gallery/Gallery';
 import Home from './Components/Home/Home';
 
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -57,13 +55,21 @@ class App extends React.Component {
     }
   }
 
+  postDel(i){
+    let arr = this.state.postFeed
+    arr.splice(i,1)
+    this.setState({
+      postFeed: arr
+    })
+  }
+
   render() {
     return (
       <Router>
-        
+
         <Route path="/" exact component={Home}></Route>
         <Route path="/add" exact render={(props) => <Addpost {...props} postTitle={this.state.postTitle} postDesc={this.state.postDesc} postImage={this.state.postImage} pushPost={this.pushPost.bind(this)} getPostTitle={this.getPostTitle.bind(this)} getPostDesc={this.getPostDesc.bind(this)} getPostImage={this.getPostImage.bind(this)}></Addpost>}></Route>
-        <Route path="/gallery" exact render={(props) => <Gallery {...props} postFeed={this.state.postFeed}></Gallery>}></Route>
+        <Route path="/gallery" exact render={(props) => <Gallery {...props} postDel={this.postDel.bind(this)} postFeed={this.state.postFeed}></Gallery>}></Route>
 
       </Router>
     );
