@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Link } from "react-router-dom";
+
 
 function Addpost({getPostTitle, pushPost, getPostDesc, postDesc, postTitle, getPostImage, postImage}) {
     return (
@@ -15,6 +17,9 @@ function Addpost({getPostTitle, pushPost, getPostDesc, postDesc, postTitle, getP
                 Post Image:
                 <input type="text" onChange={(g) => {getPostImage(g)}} value={postImage}></input>
                 <button onClick={()=>{pushPost()}}>Submit</button>                 
+            </div>
+            <div>
+              <Link to="/gallery">GALLERY</Link>
             </div>
         </div>
     );
