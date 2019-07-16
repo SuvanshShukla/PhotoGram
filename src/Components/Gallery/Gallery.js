@@ -25,12 +25,12 @@ function Gallery({ postFeed, postDel }) {
                         <Menu
                             theme="dark"
                             mode="horizontal"
-                            defaultSelectedKeys={[]}
+                            defaultSelectedKeys={['3']}
                             style={{ lineHeight: '64px' }}
                         >
-                            <Menu.Item key="1"><Link to="/add">Add a new post</Link></Menu.Item>
-                            <Menu.Item key="2"><Link to="/">Home</Link></Menu.Item>
-                            <Menu.Item key="3">Temporarily Empty</Menu.Item>
+                            <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
+                            <Menu.Item key="2"><Link to="/add">Add a new post</Link></Menu.Item>
+                            <Menu.Item key="3">Gallery</Menu.Item>
                         </Menu>
                     </Header>
                     <Content style={{ padding: '0 50px' }}>

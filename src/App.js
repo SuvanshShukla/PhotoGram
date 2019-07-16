@@ -55,7 +55,7 @@ class App extends React.Component {
     }
   }
 
-  postDel(i){
+  postDel(i){ //post is deleted based on the index passed at the gallery
     let arr = this.state.postFeed
     arr.splice(i,1)
     this.setState({
