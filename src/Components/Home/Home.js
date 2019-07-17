@@ -32,15 +32,13 @@ function Home() {
                         <Breadcrumb style={{ margin: '16px 0' }}>
                             <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
                             <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            {/* <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item> */}
                         </Breadcrumb>
-                        <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                        <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
                             <h1>Welcome to PhotoGram!!</h1>
-                            -> this is where you'll add the login options
+                            {/*-> this is where you'll add the login options*/}
                         </div>
                     </Content>
-                <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
+                    <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
                 </Layout>
             </div>
         </div>

@@ -37,13 +37,13 @@ function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, get
                         <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
                         <Breadcrumb.Item>Add a post</Breadcrumb.Item>
                     </Breadcrumb>
-                    <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-                        Post Title:
-                    <Input placeholder="input with clear icon" allowClear onChange={(e) => { getPostTitle(e) }} value={postTitle}/>
-                        Post Description:
-                    <Input placeholder="input with clear icon" allowClear onChange={(f) => { getPostDesc(f) }} value={postDesc}/>
-                        Post Image:
-                    <Input placeholder="input with clear icon" allowClear onChange={(g) => { getPostImage(g) }} value={postImage}/>
+                    <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
+                        Post Title:     {/* This is where the post title is inputed */}
+                    <Input placeholder="Please add your post title here" allowClear onChange={(e) => { getPostTitle(e) }} value={postTitle}/>
+                        Post Description:   {/* This is where post description is inputed*/}  
+                    <Input placeholder="Please add your post description here" allowClear onChange={(f) => { getPostDesc(f) }} value={postDesc}/>
+                        Post Image:     {/* This is where the post image is inputed*/}
+                    <Input placeholder="Please add your post image URL here" allowClear onChange={(g) => { getPostImage(g) }} value={postImage}/>
                         <Button type="primary" onClick={() => { pushPost(); openNotification()}}>Submit</Button>
 
                     </div>

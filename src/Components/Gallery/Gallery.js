@@ -33,9 +33,9 @@ function Gallery({ postFeed, postDel }) {
                             <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
                             <Breadcrumb.Item>Gallery</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                        <div style={{ background: '#fff', padding: 24, minHeight: 500 }}>
 
-                            {postFeed.map((x, i) =>
+                            {postFeed.map((x, i) =>     //the feed is mapped and molded into cards at this point
                                 <Card
                                     style={{ width: 300 }}
                                     cover={
@@ -56,7 +56,7 @@ function Gallery({ postFeed, postDel }) {
 
                         </div>
                     </Content>
-                <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
+                    <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
                 </Layout>
             </div>
         </section>
