@@ -22,6 +22,7 @@ function Home() {
                             defaultSelectedKeys={['1']}
                             style={{ lineHeight: '64px' }}
                         >
+                            <Menu.Item key='0'><b>PhotoGram</b></Menu.Item>
                             <Menu.Item key="1">Home</Menu.Item>
                             <Menu.Item key="2"><Link to="/add">Add a new post</Link></Menu.Item>
                             <Menu.Item key="3"><Link to="/gallery">Gallery</Link></Menu.Item>
@@ -29,6 +30,7 @@ function Home() {
                     </Header>
                     <Content style={{ padding: '0 50px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
+                            <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
                             <Breadcrumb.Item>Home</Breadcrumb.Item>
                             {/* <Breadcrumb.Item>List</Breadcrumb.Item>
                             <Breadcrumb.Item>App</Breadcrumb.Item> */}
@@ -38,7 +40,7 @@ function Home() {
                             -> this is where you'll add the login options
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
                 </Layout>
             </div>
         </div>

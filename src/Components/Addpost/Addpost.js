@@ -26,6 +26,7 @@ function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, get
                         defaultSelectedKeys={['2']}
                         style={{ lineHeight: '64px' }}
                     >
+                        <Menu.Item key='0'><b>PhotoGram</b></Menu.Item>
                         <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
                         <Menu.Item key="2">Add a new post</Menu.Item>
                         <Menu.Item key="3"><Link to="/gallery">Gallery</Link></Menu.Item>
@@ -33,9 +34,8 @@ function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, get
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
+                        <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
+                        <Breadcrumb.Item>Add a post</Breadcrumb.Item>
                     </Breadcrumb>
                     <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
                         Post Title:
@@ -48,7 +48,7 @@ function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, get
 
                     </div>
                 </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
             </Layout>
         </div>
     );

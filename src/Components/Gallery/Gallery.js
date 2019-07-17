@@ -22,6 +22,7 @@ function Gallery({ postFeed, postDel }) {
                             defaultSelectedKeys={['3']}
                             style={{ lineHeight: '64px' }}
                         >
+                            <Menu.Item key='0'><b>PhotoGram</b></Menu.Item>
                             <Menu.Item key="1"><Link to="/">Home</Link></Menu.Item>
                             <Menu.Item key="2"><Link to="/add">Add a new post</Link></Menu.Item>
                             <Menu.Item key="3">Gallery</Menu.Item>
@@ -29,9 +30,8 @@ function Gallery({ postFeed, postDel }) {
                     </Header>
                     <Content style={{ padding: '0 50px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
+                            <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
+                            <Breadcrumb.Item>Gallery</Breadcrumb.Item>
                         </Breadcrumb>
                         <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
 
@@ -56,7 +56,7 @@ function Gallery({ postFeed, postDel }) {
 
                         </div>
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+                <Footer style={{ textAlign: 'center' }}>Made By <a href="https://github.com/SuvanshShukla">Suvansh Shukla</a></Footer>
                 </Layout>
             </div>
         </section>
