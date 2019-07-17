@@ -1,10 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Layout, Menu, Breadcrumb, Input, Button } from 'antd';
+import { Layout, Menu, Breadcrumb, Input, Button, notification, Icon } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 
 function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, getPostImage, postImage }) {
+
+    const openNotification = () => {
+        notification.open({
+          message: 'Post Creation Successful',
+          description:
+            "Post successfully created! To see your post go to the Gallery tab.",
+          icon: <Icon type="smile" style={{ color: '#108ee9' }} />,
+        });
+      };
+
     return (
         <div>
             <Layout className="layout">
@@ -34,7 +44,7 @@ function Addpost({ getPostTitle, pushPost, getPostDesc, postDesc, postTitle, get
                     <Input placeholder="input with clear icon" allowClear onChange={(f) => { getPostDesc(f) }} value={postDesc}/>
                         Post Image:
                     <Input placeholder="input with clear icon" allowClear onChange={(g) => { getPostImage(g) }} value={postImage}/>
-                        <Button type="primary" onClick={() => { pushPost() }}>Submit</Button>
+                        <Button type="primary" onClick={() => { pushPost(); openNotification()}}>Submit</Button>
 
                     </div>
                 </Content>

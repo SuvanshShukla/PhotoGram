@@ -6,7 +6,7 @@ const { Header, Content, Footer } = Layout;
 
 //->This is the homepage
 //->This is also where the login will be
-
+//!! add a better navBar 
 
 
 function Home() {
