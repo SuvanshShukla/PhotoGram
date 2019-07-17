@@ -6,13 +6,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 
 
-//-> gotta add remove card option
-//OKK icon for deletion added
-
-
 //!! make the posts centered and display it in a group of 3
-
-//-> some styling has been added
 
 function Gallery({ postFeed, postDel }) {
     const { Meta } = Card;

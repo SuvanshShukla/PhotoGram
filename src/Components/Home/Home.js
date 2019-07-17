@@ -34,6 +34,7 @@ function Home() {
                             <Breadcrumb.Item>App</Breadcrumb.Item> */}
                         </Breadcrumb>
                         <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+                            <h1>Welcome to PhotoGram!!</h1>
                             -> this is where you'll add the login options
                         </div>
                     </Content>
