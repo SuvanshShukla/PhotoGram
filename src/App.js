@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Addpost from "./Components/Addpost/Addpost";
 import Gallery from "./Components/Gallery/Gallery";
 import Home from "./Components/Home/Home";
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,15 @@ class App extends React.Component {
       postDesc: "",
       postImage: ""
     };
+  }
+
+  componentDidMount() {    //here we are updating the gallery everytime postFeed is updated!
+    axios.get("http://localhost:8080/posts").then(res => {
+      this.setState({
+        postFeed: res.data
+      })
+      console.log(res.data);
+    })
   }
 
   getPostTitle(e) {
@@ -47,27 +57,36 @@ class App extends React.Component {
       imgUrl: this.state.postImage
     };
 
-    if (obj.title !== "") {
-      arr.push(obj);
+    axios.post("http://localhost:8080/post", obj).then(res => {
+      if (res.data.title !== "") {
+        arr.push(res.data);
 
-      this.setState({
-        postFeed: arr,
-        postTitle: "",
-        postDesc: "",
-        postImage: ""
-      });
+        this.setState({
+          postFeed: arr,
+          postTitle: "",
+          postDesc: "",
+          postImage: ""
+        });
 
-      console.log(this.state.postFeed);
-    }
+        console.log(this.state.postFeed);
+      }
+    })
   }
 
   postDel(i) {
     //post is deleted based on the index passed at the gallery
     let arr = this.state.postFeed;
-    arr.splice(i, 1);
-    this.setState({
-      postFeed: arr
-    });
+    let item = arr[i];
+
+    axios.delete("http://localhost:8080/post/" + item._id).then(res => {
+      arr.splice(i, 1);
+      console.log(res.data);  //this shows which obj is being deleted
+      
+      this.setState({
+        postFeed: arr   
+      });
+    })
+
   }
 
   render() {
