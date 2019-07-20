@@ -21,7 +21,7 @@ function Home() {
               style={{ lineHeight: "64px" }}
             >
               <Menu.Item key="0">
-                <b>PhotoGram</b>
+                <b>Super PhotoGram</b>
               </Menu.Item>
               <Menu.Item key="1">Home</Menu.Item>
               <Menu.Item key="2">

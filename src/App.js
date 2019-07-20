@@ -1,10 +1,26 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Addpost from "./Components/Addpost/Addpost";
 import Gallery from "./Components/Gallery/Gallery";
 import Home from "./Components/Home/Home";
 import axios from "axios";
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyD4xKC6UoenEJsCYa9bALPVdkv4t_91zXA",
+  authDomain: "super-photogram.firebaseapp.com",
+  databaseURL: "https://super-photogram.firebaseio.com",
+  projectId: "super-photogram",
+  storageBucket: "",
+  messagingSenderId: "659416245147",
+  appId: "1:659416245147:web:96a9ef697fc6574d"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
 
 class App extends React.Component {
   constructor(props) {
@@ -14,17 +30,19 @@ class App extends React.Component {
       postFeed: [],
       postTitle: "",
       postDesc: "",
-      postImage: ""
+      postImage: "",
+      user: {}
     };
   }
 
-  componentDidMount() {    //here we are updating the gallery everytime postFeed is updated!
+  componentDidMount() {
+    //here we are updating the gallery everytime postFeed is updated!
     axios.get("http://localhost:8080/posts").then(res => {
       this.setState({
         postFeed: res.data
-      })
+      });
       console.log(res.data);
-    })
+    });
   }
 
   getPostTitle(e) {
@@ -48,7 +66,7 @@ class App extends React.Component {
     });
   }
 
-  pushPost() {    //>>axios has been installed so you'll have to put the below code in an axios api
+  pushPost() {
     //pushing object after title and desc have been added, posts with empty titles and desc wont be pushed
     let arr = this.state.postFeed;
     let obj = {
@@ -70,7 +88,7 @@ class App extends React.Component {
 
         console.log(this.state.postFeed);
       }
-    })
+    });
   }
 
   postDel(i) {
@@ -80,14 +98,58 @@ class App extends React.Component {
 
     axios.delete("http://localhost:8080/post/" + item._id).then(res => {
       arr.splice(i, 1);
-      console.log(res.data);  //this shows which obj is being deleted
-      
-      this.setState({
-        postFeed: arr   
-      });
-    })
+      console.log(res.data); //this shows which obj is being deleted
 
+      this.setState({
+        postFeed: arr
+      });
+    });
   }
+
+  googleLogin() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider).then(function (result) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      console.log(user.displayName, user.email);
+      // ...
+      this.setState({
+        user: user
+      })
+      this.props.history.push("/gallery");
+    }).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
+
+  checkLogin() {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        // User is signed in.
+      } else {
+        // No user is signed in.
+      }
+    });
+  }
+
+  logout() {
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+    }).catch(function (error) {
+      // An error happened.
+    });
+  }
+
 
   render() {
     return (
