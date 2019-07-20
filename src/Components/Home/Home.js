@@ -1,13 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Button, Row, Col } from "antd";
 const { Header, Content, Footer } = Layout;
 
 //->This is the homepage
 //->This is also where the login will be
 //!! add a better navBar
 
-function Home() {
+function Home({login, logout, check, user}) {
   return (
     <div>
       <div>
@@ -40,6 +40,27 @@ function Home() {
             <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
               <h1>Welcome to PhotoGram!!</h1>
               {/*-> this is where you'll add the login options*/}
+              {user?
+              <div>
+                <Row type='flex' justify='center'>
+                  <Col span={12}>
+                    <Button type='primary' block onClick={()=>{logout()}}>Logout</Button>
+                  </Col>
+                </Row>
+              </div>:
+              <div>
+                <Row type='flex' justify='center'>
+                  <Col span={12}>
+                    <Button type='primary' block onClick={()=>{login()}}>Login</Button>
+                  </Col>
+                </Row>
+              </div>}
+
+
+
+
+
+
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
