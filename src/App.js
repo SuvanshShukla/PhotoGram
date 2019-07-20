@@ -31,7 +31,7 @@ class App extends React.Component {
       postTitle: "",
       postDesc: "",
       postImage: "",
-      user:null
+      user: null
     };
   }
 
@@ -115,18 +115,27 @@ class App extends React.Component {
       // The signed-in user info.
       var user = result.user;
 
-      var that = this; //->I have no clue as to why this line works but it does and i'm pushing it to github
+      // var that = this; //>> this line isn't at all necessary because all I had to do was convert the function into an arrow function
       
+
+
       console.log(user.displayName, user.email);
       // ...
       this.setState({
         user: user
       })
 
-      // this.props.history.push("/gallery");
-      
+
       console.log(this.state.user)
-    }).catch( (error) => {
+      //!!For this to work you'll have to install the history package and do all the necessary steps for setting it up
+      this.props.history.push({pathname:"/gallery"})
+     
+
+      /* const { history } = this.props;
+      history.push("/gallery") */
+
+      // this.props.history.push("/gallery").bind(this)
+    }).catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -139,28 +148,32 @@ class App extends React.Component {
   }
 
   checkLogin() {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User is signed in.
         this.setState({
           user:user
         })
+        console.log("User is signed in");
 
-        console.log(this.state.user)
       } else {
         // No user is signed in.
+        console.log("user is not signed in ");
+
       }
     });
   }
 
   logout() {
-    firebase.auth().signOut().then( () => {
+    firebase.auth().signOut().then(() => {
       // Sign-out successful.
       this.setState({
-        user:null
+        user: null
       })
       console.log(this.state.user);
-      
+      this.props.history.push("/gallery")
+
+
     }).catch(function (error) {
       // An error happened.
     });
@@ -170,18 +183,18 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route 
-        path="/" 
-        exact 
-        render={props => (
-          <Home 
-            {...props}
-            login={this.googleLogin.bind(this)}
-            logout={this.logout.bind(this)}
-            check={this.checkLogin.bind(this)}
-            user={this.state.user}
-          />
-        )}
+        <Route
+          path="/"
+          exact
+          render={props => (
+            <Home
+              {...props}
+              login={this.googleLogin.bind(this)}
+              logout={this.logout.bind(this)}
+              check={this.checkLogin.bind(this)}
+              user={this.state.user}
+            />
+          )}
         />
 
         <Route
@@ -218,13 +231,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-/* <div>
-                <Row type='flex' justify='center'>
-                  <Col span={12}>
-                    <Button type='primary' block onClick={()=>{gLogin()}}>LOGIN</Button>
-                  </Col>
-                </Row>
-              </div> */

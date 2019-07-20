@@ -40,11 +40,13 @@ function Home({login, logout, check, user}) {
             <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
               <h1>Welcome to PhotoGram!!</h1>
               {/*-> this is where you'll add the login options*/}
+              {/* {check()} */}
               {user?
               <div>
                 <Row type='flex' justify='center'>
                   <Col span={12}>
                     <Button type='primary' block onClick={()=>{logout()}}>Logout</Button>
+                    <h3>Congratulations You Are Logged In!</h3>
                   </Col>
                 </Row>
               </div>:
@@ -55,6 +57,7 @@ function Home({login, logout, check, user}) {
                   </Col>
                 </Row>
               </div>}
+              
 
 
 
