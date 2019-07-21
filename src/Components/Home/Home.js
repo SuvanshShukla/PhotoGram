@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb, Button, Row, Col } from "antd";
+import { Redirect } from "react-router";    //>>this works like a charm!
 const { Header, Content, Footer } = Layout;
 
 //->This is the homepage
@@ -47,6 +48,7 @@ function Home({login, logout, check, user}) {
                   <Col span={12}>
                     <Button type='primary' block onClick={()=>{logout()}}>Logout</Button>
                     <h3>Congratulations You Are Logged In!</h3>
+                    <Redirect to="/gallery"/> //>>works perfectly!
                   </Col>
                 </Row>
               </div>:

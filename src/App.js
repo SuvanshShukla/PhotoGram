@@ -1,12 +1,16 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import {createBrowserHistory} from "history";
 import Addpost from "./Components/Addpost/Addpost";
 import Gallery from "./Components/Gallery/Gallery";
 import Home from "./Components/Home/Home";
 import axios from "axios";
 import * as firebase from "firebase/app";
 import "firebase/auth";
+
+const history = createBrowserHistory;
+
 
 
 var firebaseConfig = {
@@ -128,8 +132,11 @@ class App extends React.Component {
 
       console.log(this.state.user)
       //!!For this to work you'll have to install the history package and do all the necessary steps for setting it up
-      this.props.history.push({pathname:"/gallery"})
+      // history.push('/add');
+      //FIXME the above line didn't really work so i used <Redirect> instead and it works like a charm!
      
+      console.log("Is this showing?");
+      
 
       /* const { history } = this.props;
       history.push("/gallery") */
