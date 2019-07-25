@@ -5,12 +5,13 @@ import { createBrowserHistory } from "history";
 import Addpost from "./Components/Addpost/Addpost";
 import Gallery from "./Components/Gallery/Gallery";
 import Home from "./Components/Home/Home";
+import MyPosts from "./Components/Myposts/MyPosts";
 import axios from "axios";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
-
-const customHistory = createBrowserHistory({foreceRefresh:true});
+const history = createBrowserHistory()
+// const customHistory = createBrowserHistory();
 
 
 var firebaseConfig = {
@@ -31,7 +32,7 @@ class App extends React.Component {
     super(props);
     this.state = {};
     this.state = {
-      postFeed: [],
+      postFeed: "",
       postTitle: "",
       postDesc: "",
       postImage: "",
@@ -76,7 +77,8 @@ class App extends React.Component {
     let obj = {
       title: this.state.postTitle,
       desc: this.state.postDesc,
-      imgUrl: this.state.postImage
+      imgUrl: this.state.postImage,
+      uid: this.state.user.uid
     };
 
     axios.post("http://localhost:8080/post", obj).then(res => {
@@ -111,13 +113,11 @@ class App extends React.Component {
   }
 
   googleLogin() {
-    const history = createBrowserHistory();
+    // const history = createBrowserHistory();
 
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
-    provider.addScope('email');
-
-    
+    provider.addScope('email');    
 
     firebase.auth().signInWithPopup(provider).then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
@@ -129,16 +129,16 @@ class App extends React.Component {
         user: user
       });
 
-      history.push("/gallery");
-
+      // this.props.dispatch(push("/gallery"));
       
       // window.location.reload()
       // router.transitionTo("/gallery")
-
+      
       console.log(user.displayName, user.email);
       console.log(this.state.user);
       console.log(history);
       
+      history.replace("/gallery");
 
     }).catch((error) => {
       // Handle Errors here.
@@ -173,7 +173,7 @@ class App extends React.Component {
         user: null
       })
       console.log(this.state.user);
-      this.props.history.push("/gallery")
+      // this.props.history.push("/gallery")
 
 
     }).catch(function (error) {
@@ -184,7 +184,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router history={customHistory}>
+      <Router /* history={history} */>
         <Route
           path="/"
           exact
@@ -212,6 +212,8 @@ class App extends React.Component {
               getPostTitle={this.getPostTitle.bind(this)}
               getPostDesc={this.getPostDesc.bind(this)}
               getPostImage={this.getPostImage.bind(this)}
+              user={this.state.user}
+
             />
           )}
         />
@@ -223,7 +225,20 @@ class App extends React.Component {
             <Gallery
               {...props}
               postDel={this.postDel.bind(this)}
+              user={this.state.user}
               postFeed={this.state.postFeed}
+            />
+          )}
+        />
+
+        <Route
+          path="/myposts"
+          exact
+          render={(props) => (
+            <MyPosts
+              {...props}
+              postFeed={this.state.postFeed}
+              postDel={this.postDel.bind(this)}
             />
           )}
         />

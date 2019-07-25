@@ -18,7 +18,8 @@ function Addpost({
   postDesc,
   postTitle,
   getPostImage,
-  postImage
+  postImage,
+  user
 }) {
   const openNotification = () => {
     notification.open({
@@ -34,14 +35,14 @@ function Addpost({
       <Layout className="layout">
         <Header>
           <div className="logo" />
-          <Menu
+          {user?<Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={["2"]}
             style={{ lineHeight: "64px" }}
           >
             <Menu.Item key="0">
-              <b>PhotoGram</b>
+              <b>Super PhotoGram</b>
             </Menu.Item>
             <Menu.Item key="1">
               <Link to="/">Home</Link>
@@ -50,11 +51,11 @@ function Addpost({
             <Menu.Item key="3">
               <Link to="/gallery">Gallery</Link>
             </Menu.Item>
-          </Menu>
+          </Menu>:null}
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>PhotoGram</Breadcrumb.Item>
+            <Breadcrumb.Item>Super PhotoGram</Breadcrumb.Item>
             <Breadcrumb.Item>Add a post</Breadcrumb.Item>
           </Breadcrumb>
           <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
