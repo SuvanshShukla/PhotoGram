@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import {createBrowserHistory} from "history";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import Addpost from "./Components/Addpost/Addpost";
 import Gallery from "./Components/Gallery/Gallery";
 import Home from "./Components/Home/Home";
@@ -9,8 +9,8 @@ import axios from "axios";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 
-const history = createBrowserHistory;
 
+const customHistory = createBrowserHistory({foreceRefresh:true});
 
 
 var firebaseConfig = {
@@ -111,37 +111,35 @@ class App extends React.Component {
   }
 
   googleLogin() {
-    var provider = new firebase.auth.GoogleAuthProvider();
+    const history = createBrowserHistory();
 
-    firebase.auth().signInWithPopup(provider).then(result => {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+
+    
+
+    firebase.auth().signInWithPopup(provider).then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
+      
       // The signed-in user info.
       var user = result.user;
-
-      // var that = this; //>> this line isn't at all necessary because all I had to do was convert the function into an arrow function
-      
-
-
-      console.log(user.displayName, user.email);
-      // ...
       this.setState({
         user: user
-      })
+      });
 
+      history.push("/gallery");
 
-      console.log(this.state.user)
-      //!!For this to work you'll have to install the history package and do all the necessary steps for setting it up
-      // history.push('/add');
-      //FIXME the above line didn't really work so i used <Redirect> instead and it works like a charm!
-     
-      console.log("Is this showing?");
+      
+      // window.location.reload()
+      // router.transitionTo("/gallery")
+
+      console.log(user.displayName, user.email);
+      console.log(this.state.user);
+      console.log(history);
       
 
-      /* const { history } = this.props;
-      history.push("/gallery") */
-
-      // this.props.history.push("/gallery").bind(this)
     }).catch((error) => {
       // Handle Errors here.
       var errorCode = error.code;
@@ -151,16 +149,13 @@ class App extends React.Component {
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
       // ...
-    });
+    }) 
   }
 
   checkLogin() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        // User is signed in.
-        this.setState({
-          user:user
-        })
+        // User is signed in
         console.log("User is signed in");
 
       } else {
@@ -189,11 +184,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
+      <Router history={customHistory}>
         <Route
           path="/"
           exact
-          render={props => (
+          render={(props) => (
             <Home
               {...props}
               login={this.googleLogin.bind(this)}
@@ -207,7 +202,7 @@ class App extends React.Component {
         <Route
           path="/add"
           exact
-          render={props => (
+          render={(props) => (
             <Addpost
               {...props}
               postTitle={this.state.postTitle}
@@ -224,7 +219,7 @@ class App extends React.Component {
         <Route
           path="/gallery"
           exact
-          render={props => (
+          render={(props) => (
             <Gallery
               {...props}
               postDel={this.postDel.bind(this)}
@@ -238,3 +233,4 @@ class App extends React.Component {
 }
 
 export default App;
+// var that = this; //>> this line isn't at all necessary because all I had to do was convert the function into an arrow function

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Layout, Menu, Breadcrumb, Button, Row, Col } from "antd";
+import { Layout, Menu, Breadcrumb, Button, Row, Col, Avatar } from "antd";
 import { Redirect } from "react-router";    //>>this works like a charm!
 const { Header, Content, Footer } = Layout;
 
@@ -39,23 +39,22 @@ function Home({login, logout, check, user}) {
               <Breadcrumb.Item>Home</Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
-              <h1>Welcome to PhotoGram!!</h1>
               {/*-> this is where you'll add the login options*/}
-              {/* {check()} */}
               {user?
               <div>
                 <Row type='flex' justify='center'>
                   <Col span={12}>
-                    <Button type='primary' block onClick={()=>{logout()}}>Logout</Button>
-                    <h3>Congratulations You Are Logged In!</h3>
-                    <Redirect to="/gallery"/> //>>works perfectly!
+                    <Col span ={12} offset={6}><h1>Welcome to PhotoGram!!</h1></Col>
+                    <Col span ={12} offset={6}><Avatar size={200} icon="user" src={user.photoURL}/></Col>
+                    <Col span ={12} offset={6}><h2>{user.displayName}</h2></Col>
+                    <Col span ={10} offset={6}><Button type='primary' block onClick={()=>{logout()}}>Logout</Button></Col>
                   </Col>
                 </Row>
               </div>:
               <div>
                 <Row type='flex' justify='center'>
                   <Col span={12}>
-                    <Button type='primary' block onClick={()=>{login()}}>Login</Button>
+                    <Button type='primary' block onClick={()=>{login()}}>Login</Button>                                       
                   </Col>
                 </Row>
               </div>}
@@ -79,3 +78,4 @@ function Home({login, logout, check, user}) {
 }
 
 export default Home;
+                    {/* <Redirect to="/gallery"/> //>>works, but you can't go back to homepage */}
