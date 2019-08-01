@@ -15,6 +15,8 @@ const history = createBrowserHistory()
 // const customHistory = createBrowserHistory();
 
 
+//!!Gotta make the website more secure and format the remaining stuff
+
 var firebaseConfig = {
   apiKey: "AIzaSyD4xKC6UoenEJsCYa9bALPVdkv4t_91zXA",
   authDomain: "super-photogram.firebaseapp.com",
@@ -246,6 +248,8 @@ class App extends React.Component {
               getPostImage={this.getPostImage.bind(this)}
               user={this.state.user}
               fileUpload={this.fileUploadFirebase.bind(this)}
+              user={this.state.user}
+
             />
           )}
         />

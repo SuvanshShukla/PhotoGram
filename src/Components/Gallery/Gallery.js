@@ -88,11 +88,11 @@ function Gallery({ postFeed, postDel, user }) {
                   }}
                   description={
                     <span>
-                      Customize <a href="#API">Description</a>
+                      Welp! looks like you haven't made any posts click below to make one!
                     </span>
                   }
                 >
-                  <Button type="primary">Create Now</Button>
+                  <Button type="primary"><Link to="add">Create Now</Link></Button>
                 </Empty>
               </div>
             }

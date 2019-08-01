@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb, Card, Icon, Avatar } from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Icon, Avatar, Empty, Button} from 'antd';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 
@@ -35,17 +35,18 @@ function MyPosts({ postFeed, postDel }) {
                 </Menu>
             </Header>
             <Content style={{ padding: '0 50px' }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Super PhotoGram</Breadcrumb.Item>
-              <Breadcrumb.Item>My Posts</Breadcrumb.Item>
-            </Breadcrumb>
+                <Breadcrumb style={{ margin: "16px 0" }}>
+                    <Breadcrumb.Item>Super PhotoGram</Breadcrumb.Item>
+                    <Breadcrumb.Item>My Posts</Breadcrumb.Item>
+                </Breadcrumb>
                 <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-                    //->The personal feed comes here
                     <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
-                        {postFeed.map((
-                            x,
-                            i //the feed is mapped and molded into cards at this point
-                        ) => (
+                        {postFeed ?
+                            <div>
+                                {postFeed.map((
+                                x,
+                                i //the feed is mapped and molded into cards at this point
+                            ) => (
                                 <Card
                                     key={i}
                                     style={{ width: 300 }}
@@ -63,13 +64,31 @@ function MyPosts({ postFeed, postDel }) {
                                 >
                                     <Meta
                                         avatar={
-                                            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                            <Avatar src={x.imgUrl} />
                                         }
                                         title={x.title}
                                         description={x.desc}
                                     />
                                 </Card>
-                            ))}
+                                ))}
+                        </div>
+                            :
+                            <div>
+                                <Empty
+                                    image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
+                                    imageStyle={{
+                                        height: 60,
+                                    }}
+                                    description={
+                                        <span>
+                                            Oopsie Daisy! looks like you don't have any posts. Click below to make a post!
+                                        </span>
+                                    }
+                                >
+                                    <Button type="primary"><Link to="/add">Create Post!</Link></Button>
+                                </Empty>
+                            </div>
+                        }
                     </div>
                 </div>
             </Content>
