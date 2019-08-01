@@ -9,6 +9,7 @@ import MyPosts from "./Components/Myposts/MyPosts";
 import axios from "axios";
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/storage";
 
 const history = createBrowserHistory()
 // const customHistory = createBrowserHistory();
@@ -19,7 +20,7 @@ var firebaseConfig = {
   authDomain: "super-photogram.firebaseapp.com",
   databaseURL: "https://super-photogram.firebaseio.com",
   projectId: "super-photogram",
-  storageBucket: "",
+  storageBucket: "super-photogram.appspot.com",
   messagingSenderId: "659416245147",
   appId: "1:659416245147:web:96a9ef697fc6574d"
 };
@@ -117,12 +118,12 @@ class App extends React.Component {
 
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
-    provider.addScope('email');    
+    provider.addScope('email');
 
     firebase.auth().signInWithPopup(provider).then((result) => {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
-      
+
       // The signed-in user info.
       var user = result.user;
       this.setState({
@@ -130,14 +131,14 @@ class App extends React.Component {
       });
 
       // this.props.dispatch(push("/gallery"));
-      
+
       // window.location.reload()
       // router.transitionTo("/gallery")
-      
+
       console.log(user.displayName, user.email);
       console.log(this.state.user);
       console.log(history);
-      
+
       history.replace("/gallery");
 
     }).catch((error) => {
@@ -149,7 +150,7 @@ class App extends React.Component {
       // The firebase.auth.AuthCredential type that was used.
       var credential = error.credential;
       // ...
-    }) 
+    })
   }
 
   checkLogin() {
@@ -179,6 +180,36 @@ class App extends React.Component {
     }).catch(function (error) {
       // An error happened.
     });
+  }
+
+  uploadFile(e) {
+    console.log(e.target.files[0])
+    let fd = new FormData()
+    fd.append("avatar", e.target.files[0])
+
+    axios.post("http://localhost:8080/postImage", fd, {
+      headers: {
+        'Content-Type': "multipart/form-data"
+      }
+    })
+  }
+
+  fileUploadFirebase(e) {
+    console.log(e.target.files[0]);
+    var storageRef = firebase.storage().ref();
+
+    var userImagesRef = storageRef.child('images.jpg');
+
+    userImagesRef.put(e.target.files[0]).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+      userImagesRef.getDownloadURL().then((url)=>{
+        console.log(url);
+        
+        this.setState({
+          postImage: url
+        })
+      })
+    });  
   }
 
 
@@ -213,7 +244,7 @@ class App extends React.Component {
               getPostDesc={this.getPostDesc.bind(this)}
               getPostImage={this.getPostImage.bind(this)}
               user={this.state.user}
-
+              fileUpload={this.fileUploadFirebase.bind(this)}
             />
           )}
         />

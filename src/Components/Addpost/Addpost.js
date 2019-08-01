@@ -19,7 +19,8 @@ function Addpost({
   postTitle,
   getPostImage,
   postImage,
-  user
+  user,
+  fileUpload
 }) {
   const openNotification = () => {
     notification.open({
@@ -78,7 +79,7 @@ function Addpost({
               value={postDesc}
             />
             Post Image: {/* This is where the post image is inputed*/}
-            <Input
+            {/* <Input
               placeholder="Please add your post image URL here"
               allowClear
               onChange={g => {
@@ -86,6 +87,8 @@ function Addpost({
               }}
               value={postImage}
             />
+             */}
+            <input type="file" onChange={(e)=>{fileUpload(e)}} />
             <Button
               type="primary"
               onClick={() => {
