@@ -8,7 +8,7 @@ const { Header, Content, Footer } = Layout;
 //->This is also where the login will be
 //!! add a better navBar
 
-function Home({login, logout, check, user}) {
+function Home({login, logout, check, user, getPersonal}) {
   return (
     <div>
       <div>
@@ -36,7 +36,7 @@ function Home({login, logout, check, user}) {
         <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={["0"]}
             style={{ lineHeight: "64px" }}
         >
           <Menu.Item key="0"><b>Login to Enter Super PhotoGram!!</b></Menu.Item>
@@ -56,7 +56,7 @@ function Home({login, logout, check, user}) {
                     <Col span ={24} offset={6}><h1>Welcome to Super PhotoGram!!</h1></Col>
                     <Col span ={24} offset={6}><Avatar size={200} icon="user" src={user.photoURL}/></Col>
                     <Col span ={24} offset={6}><h2>{user.displayName}</h2></Col>
-                    <Col span ={24} offset={6}><Button><Link to="/myposts">My Posts</Link></Button></Col>
+                    <Col span ={24} offset={6}><Button onClick={()=>{getPersonal()}}><Link to="/myposts">My Posts</Link></Button></Col>
                     <Col span ={10} offset={6}><Button type='primary' block onClick={()=>{logout()}}>Logout</Button></Col>
                   </Col>
                 </Row>

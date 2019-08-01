@@ -1,12 +1,12 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb, Card, Icon, Avatar, Empty, Button} from 'antd';
+import { Layout, Menu, Breadcrumb, Card, Icon, Avatar, Empty, Button } from 'antd';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "antd/dist/antd.css";
 
 const { Header, Content, Footer } = Layout;
 
 
-function MyPosts({ postFeed, postDel, user }) {
+function MyPosts({ prsnlFeed, postDel, user }) {
     const { Meta } = Card;
 
     return (
@@ -41,37 +41,37 @@ function MyPosts({ postFeed, postDel, user }) {
                 </Breadcrumb>
                 <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
                     <div style={{ background: "#fff", padding: 24, minHeight: 500 }}>
-                        {postFeed ?
+                        {prsnlFeed ?
                             <div>
-                                {postFeed.map((
-                                x,
-                                i //the feed is mapped and molded into cards at this point
-                            ) => (
-                                <Card
-                                    key={i}
-                                    style={{ width: 300 }}
-                                    cover={<img alt="example" src={x.imgUrl} />}
-                                    actions={[
-                                        <Icon type="user" />,
-                                        <Icon
-                                            type="delete"
-                                            onClick={() => {
-                                                postDel(i);
-                                            }}
-                                        />,
-                                        <Icon type="ellipsis" />
-                                    ]}
-                                >
-                                    <Meta
-                                        avatar={
-                                            <Avatar src={user.photoURL} />
-                                        }
-                                        title={x.title}
-                                        description={x.desc}
-                                    />
-                                </Card>
-                                ))}
-                        </div>
+                                {prsnlFeed.map((
+                                    x,
+                                    i //the feed is mapped and molded into cards at this point
+                                ) => (
+                                        <Card
+                                            key={i}
+                                            style={{ width: 300 }}
+                                            cover={<img alt="example" src={x.imgUrl} />}
+                                            actions={[
+                                                <Icon type="user" />,
+                                                <Icon
+                                                    type="delete"
+                                                    onClick={() => {
+                                                        postDel(i);
+                                                    }}
+                                                />,
+                                                <Icon type="ellipsis" />
+                                            ]}
+                                        >
+                                            <Meta
+                                                avatar={
+                                                    <Avatar src={user.photoURL} />
+                                                }
+                                                title={x.title}
+                                                description={x.desc}
+                                            />
+                                        </Card>
+                                    ))}
+                            </div>
                             :
                             <div>
                                 <Empty

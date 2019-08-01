@@ -39,7 +39,9 @@ class App extends React.Component {
       postTitle: "",
       postDesc: "",
       postImage: "",
-      user: null
+      user: null,
+      personalFeed: "",
+      uid: ""
     };
   }
 
@@ -51,6 +53,7 @@ class App extends React.Component {
       });
       console.log(res.data);
     });
+
   }
 
   getPostTitle(e) {
@@ -92,7 +95,8 @@ class App extends React.Component {
           postFeed: arr,
           postTitle: "",
           postDesc: "",
-          postImage: ""
+          postImage: "",
+          uid: ""
         });
 
         console.log(this.state.postFeed);
@@ -215,6 +219,18 @@ class App extends React.Component {
     });  
   }
 
+  getpersonalFeed(){
+    let person = this.state.user
+
+    axios.get("http://localhost:8080/myPosts/" +person.uid).then(res=>{
+      this.setState({
+        personalFeed: res.data
+      })
+      console.log(res.data);
+      
+    })
+  }
+
 
   render() {
     return (
@@ -229,6 +245,7 @@ class App extends React.Component {
               logout={this.logout.bind(this)}
               check={this.checkLogin.bind(this)}
               user={this.state.user}
+              getPersonal={this.getpersonalFeed.bind(this)}
             />
           )}
         />
@@ -273,10 +290,9 @@ class App extends React.Component {
           render={(props) => (
             <MyPosts
               {...props}
-              postFeed={this.state.postFeed}
+              prsnlFeed={this.state.personalFeed}
               postDel={this.postDel.bind(this)}
               user={this.state.user}
-
             />
           )}
         />

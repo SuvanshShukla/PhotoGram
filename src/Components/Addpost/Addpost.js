@@ -94,15 +94,18 @@ function Addpost({
                 // />
                 //  */}
                 <input type="file" onChange={(e) => { fileUpload(e) }} />
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    pushPost();
-                    openNotification();
-                  }}
-                >
-                  Submit
+                <hr />
+                <div>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      pushPost();
+                      openNotification();
+                    }}
+                  >
+                    Submit
             </Button>
+                </div>
               </div>
               :
               <Empty
