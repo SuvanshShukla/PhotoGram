@@ -275,6 +275,8 @@ class App extends React.Component {
               {...props}
               postFeed={this.state.postFeed}
               postDel={this.postDel.bind(this)}
+              user={this.state.user}
+
             />
           )}
         />

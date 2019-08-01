@@ -6,7 +6,7 @@ import "antd/dist/antd.css";
 const { Header, Content, Footer } = Layout;
 
 
-function MyPosts({ postFeed, postDel }) {
+function MyPosts({ postFeed, postDel, user }) {
     const { Meta } = Card;
 
     return (
@@ -64,7 +64,7 @@ function MyPosts({ postFeed, postDel }) {
                                 >
                                     <Meta
                                         avatar={
-                                            <Avatar src={x.imgUrl} />
+                                            <Avatar src={user.photoURL} />
                                         }
                                         title={x.title}
                                         description={x.desc}
