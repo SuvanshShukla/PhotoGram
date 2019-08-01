@@ -198,7 +198,8 @@ class App extends React.Component {
     console.log(e.target.files[0]);
     var storageRef = firebase.storage().ref();
 
-    var userImagesRef = storageRef.child(`image_${Date.now()}`);
+    var userImagesRef = storageRef.child(`image_${this.state.postTitle}`); //>> here if you don't add a template which changes the name of the file then the file will keep overwriting and only the most recent one will be shown
+      //>> another way to dynamically change the name of the uploading file is to add a date template like -> ${Date.now()}
 
     userImagesRef.put(e.target.files[0]).then((snapshot) => {
       console.log('Uploaded a blob or file!');
