@@ -198,7 +198,7 @@ class App extends React.Component {
     console.log(e.target.files[0]);
     var storageRef = firebase.storage().ref();
 
-    var userImagesRef = storageRef.child('images.jpg');
+    var userImagesRef = storageRef.child(`image_${Date.now()}`);
 
     userImagesRef.put(e.target.files[0]).then((snapshot) => {
       console.log('Uploaded a blob or file!');
