@@ -47,7 +47,7 @@ class App extends React.Component {
 
   componentDidMount() {
     //here we are updating the gallery everytime postFeed is updated!
-    axios.get("http://localhost:8080/posts").then(res => {
+    axios.get("/posts").then(res => {
       this.setState({
         postFeed: res.data
       });
@@ -87,7 +87,7 @@ class App extends React.Component {
       uid: this.state.user.uid
     };
 
-    axios.post("http://localhost:8080/post", obj).then(res => {
+    axios.post("/post", obj).then(res => {
       if (res.data.title !== "") {
         arr.push(res.data);
 
@@ -109,7 +109,7 @@ class App extends React.Component {
     let arr = this.state.postFeed;
     let item = arr[i];
 
-    axios.delete("http://localhost:8080/post/" + item._id).then(res => {
+    axios.delete("/post/" + item._id).then(res => {
       arr.splice(i, 1);
       console.log(res.data); //this shows which obj is being deleted
 
@@ -193,7 +193,7 @@ class App extends React.Component {
     let fd = new FormData()
     fd.append("avatar", e.target.files[0])
 
-    axios.post("http://localhost:8080/postImage", fd, {
+    axios.post("/postImage", fd, {
       headers: {
         'Content-Type': "multipart/form-data"
       }
@@ -222,7 +222,7 @@ class App extends React.Component {
   getpersonalFeed(){
     let person = this.state.user
 
-    axios.get("http://localhost:8080/myPosts/" +person.uid).then(res=>{
+    axios.get("/myPosts/" +person.uid).then(res=>{
       this.setState({
         personalFeed: res.data
       })
